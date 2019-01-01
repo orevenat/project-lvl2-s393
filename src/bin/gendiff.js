@@ -2,10 +2,11 @@
 
 // import half from '..';
 
-const program = require('commander');
+import program from 'commander';
+import {version} from '../../package.json';
 
 program
-  .version('0.0.1')
+  .version(version)
   .description('Compares two configuration files and shows a difference.')
   .arguments('<firstConfig> <secondConfig>')
   .option('-f, --format [type]', 'Output format')
