@@ -10,6 +10,4 @@
 
 ## Примеры работы
 
-https://asciinema.org/a/EG3t8jCnc9Pc5bIudYXdr7JB2
-
-
+[![asciicast](https://asciinema.org/a/EG3t8jCnc9Pc5bIudYXdr7JB2.png)](https://asciinema.org/a/EG3t8jCnc9Pc5bIudYXdr7JB2)
