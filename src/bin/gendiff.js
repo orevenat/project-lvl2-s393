@@ -9,11 +9,12 @@ program
   .version(version)
   .description('Compares two configuration files and shows a difference.')
   .arguments('<firstConfig> <secondConfig>')
-  .action((before, after) => {
-    const beforeData = JSON.parse(fs.readFileSync(before, 'utf8'));
-    const afterData = JSON.parse(fs.readFileSync(after, 'utf8'));
+  .action((configBefore, configAfter) => {
+    const configBeforeData = JSON.parse(fs.readFileSync(configBefore, 'utf8'));
+    const configAfterData = JSON.parse(fs.readFileSync(configAfter, 'utf8'));
 
-    return genDiff(beforeData, afterData);
+    const diff = genDiff(configBeforeData, configAfterData);
+    console.log(diff);
   })
   .option('-f, --format [type]', 'Output format')
   .parse(process.argv);

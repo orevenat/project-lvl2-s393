@@ -1,6 +1,6 @@
 {
   "name": "orevenat-gendiff",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Hexlet diff generator",
   "main": "dist/index.js",
   "bin": {
@@ -28,7 +28,7 @@
   },
   "jest": {
     "testEnvironment": "node"
-  },  
+  },
   "homepage": "https://github.com/orevenat/project-lvl2-s393#readme",
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -49,6 +49,7 @@
     "jest-cli": "^23.6.0"
   },
   "dependencies": {
-    "commander": "^2.19.0"
+    "commander": "^2.19.0",
+    "lodash": "^4.17.11"
   }
 }

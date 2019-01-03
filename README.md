@@ -10,4 +10,8 @@
 
 ## Примеры работы
 
+### Установка и справка
 [![asciicast](https://asciinema.org/a/EG3t8jCnc9Pc5bIudYXdr7JB2.png)](https://asciinema.org/a/EG3t8jCnc9Pc5bIudYXdr7JB2)
+
+### Пример использования (2 шаг)
+[![asciicast](https://asciinema.org/a/X4kTTXg5K5yrwrVRvKMs8tY9t.png)](https://asciinema.org/a/X4kTTXg5K5yrwrVRvKMs8tY9t)
