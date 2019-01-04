@@ -1,9 +1,17 @@
+import fs from 'fs';
+import path from 'path';
 import _ from 'lodash';
 import parsers from './parsers';
 
+const readingFile = (filepath) => {
+  const content = fs.readFileSync(filepath, 'utf-8');
+  const fileExtension = path.extname(filepath);
+  return [content, fileExtension];
+};
+
 export default (filepath1, filepath2) => {
-  const parsedContent1 = parsers(filepath1);
-  const parsedContent2 = parsers(filepath2);
+  const parsedContent1 = parsers(...readingFile(filepath1));
+  const parsedContent2 = parsers(...readingFile(filepath2));
   const keys1 = Object.keys(parsedContent1);
   const keys2 = Object.keys(parsedContent2);
   const keysMerged = _.uniq(keys1.concat(keys2));

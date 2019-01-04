@@ -13,7 +13,7 @@ const testList = (fileType) => {
   return [fileType, configOne, configTwo, expectedDiff];
 };
 
-test.each(fileTypes.map(type => testList(type)))(
+test.each(fileTypes.map(testList))(
   'test (%s)',
   (fileType, configOne, configTwo, expectedDiff) => {
     expect(genDiff(configOne, configTwo)).toBe(expectedDiff);
