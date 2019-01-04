@@ -9,19 +9,19 @@ const readingFile = (filepath) => {
   return [content, fileExtension];
 };
 
-export default (filepath1, filepath2) => {
-  const parsedContent1 = parsers(...readingFile(filepath1));
-  const parsedContent2 = parsers(...readingFile(filepath2));
-  const keys1 = Object.keys(parsedContent1);
-  const keys2 = Object.keys(parsedContent2);
-  const keysMerged = _.uniq(keys1.concat(keys2));
-  const parseResult = keysMerged.map(key => ({
+export default (filepathBefore, filepathAfter) => {
+  const configBefore = parsers(...readingFile(filepathBefore));
+  const configAfter = parsers(...readingFile(filepathAfter));
+  const configKeysBefore = Object.keys(configBefore);
+  const configKeysAfter = Object.keys(configAfter);
+  const configKeysMerged = _.uniq(configKeysBefore.concat(configKeysAfter));
+  const diffResult = configKeysMerged.map(key => ({
     name: key,
-    oldValue: _.has(parsedContent1, key) ? parsedContent1[key] : null,
-    newValue: _.has(parsedContent2, key) ? parsedContent2[key] : null,
+    oldValue: _.has(configBefore, key) ? configBefore[key] : null,
+    newValue: _.has(configAfter, key) ? configAfter[key] : null,
   }));
 
-  const renderResult = parseResult.map((item) => {
+  const renderResult = diffResult.map((item) => {
     if (item.oldValue === item.newValue) {
       return `    ${item.name}: ${item.newValue}`;
     }
