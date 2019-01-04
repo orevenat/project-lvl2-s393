@@ -18,3 +18,6 @@
 
 ### Пример использования (3 шаг)
 [![asciicast](https://asciinema.org/a/FChgpdrH8iDUA5lcEQUYUIDPY.png)](https://asciinema.org/a/FChgpdrH8iDUA5lcEQUYUIDPY)
+
+### Пример использования (3 шаг)
+[![asciicast](https://asciinema.org/a/713wZkrWsVlJ6yq3LhpkBQgKw.png)](https://asciinema.org/a/713wZkrWsVlJ6yq3LhpkBQgKw)
