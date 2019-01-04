@@ -13,11 +13,11 @@
 ### Установка и справка
 [![asciicast](https://asciinema.org/a/EG3t8jCnc9Pc5bIudYXdr7JB2.png)](https://asciinema.org/a/EG3t8jCnc9Pc5bIudYXdr7JB2)
 
-### Пример использования (2 шаг)
+### Пример использования (2 шаг (json))
 [![asciicast](https://asciinema.org/a/X4kTTXg5K5yrwrVRvKMs8tY9t.png)](https://asciinema.org/a/X4kTTXg5K5yrwrVRvKMs8tY9t)
 
-### Пример использования (3 шаг)
+### Пример использования (3 шаг (yml))
 [![asciicast](https://asciinema.org/a/FChgpdrH8iDUA5lcEQUYUIDPY.png)](https://asciinema.org/a/FChgpdrH8iDUA5lcEQUYUIDPY)
 
-### Пример использования (3 шаг)
+### Пример использования (4 шаг (ini))
 [![asciicast](https://asciinema.org/a/713wZkrWsVlJ6yq3LhpkBQgKw.png)](https://asciinema.org/a/713wZkrWsVlJ6yq3LhpkBQgKw)
