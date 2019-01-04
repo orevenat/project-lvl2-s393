@@ -1,17 +1,16 @@
 import _ from 'lodash';
-import fs from 'fs';
-// import half from './half';
+import parsers from './parsers';
 
-export default (before, after) => {
-  const configBefore = JSON.parse(fs.readFileSync(before, 'utf8'));
-  const configAfter = JSON.parse(fs.readFileSync(after, 'utf8'));
-  const keysBefore = Object.keys(configBefore);
-  const keysAfter = Object.keys(configAfter);
-  const keysMerged = _.uniq(keysBefore.concat(keysAfter));
+export default (filepath1, filepath2) => {
+  const parsedContent1 = parsers(filepath1);
+  const parsedContent2 = parsers(filepath2);
+  const keys1 = Object.keys(parsedContent1);
+  const keys2 = Object.keys(parsedContent2);
+  const keysMerged = _.uniq(keys1.concat(keys2));
   const parseResult = keysMerged.map(key => ({
     name: key,
-    oldValue: _.has(configBefore, key) ? configBefore[key] : null,
-    newValue: _.has(configAfter, key) ? configAfter[key] : null,
+    oldValue: _.has(parsedContent1, key) ? parsedContent1[key] : null,
+    newValue: _.has(parsedContent2, key) ? parsedContent2[key] : null,
   }));
 
   const renderResult = parseResult.map((item) => {

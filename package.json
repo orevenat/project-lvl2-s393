@@ -1,6 +1,6 @@
 {
   "name": "orevenat-gendiff",
-  "version": "0.0.3b",
+  "version": "0.1.0",
   "description": "Hexlet diff generator",
   "main": "dist/index.js",
   "bin": {
@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "commander": "^2.19.0",
+    "js-yaml": "^3.12.0",
     "lodash": "^4.17.11"
   }
 }

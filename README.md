@@ -15,3 +15,6 @@
 
 ### Пример использования (2 шаг)
 [![asciicast](https://asciinema.org/a/X4kTTXg5K5yrwrVRvKMs8tY9t.png)](https://asciinema.org/a/X4kTTXg5K5yrwrVRvKMs8tY9t)
+
+### Пример использования (3 шаг)
+[![asciicast](https://asciinema.org/a/FChgpdrH8iDUA5lcEQUYUIDPY.png)](https://asciinema.org/a/FChgpdrH8iDUA5lcEQUYUIDPY)
