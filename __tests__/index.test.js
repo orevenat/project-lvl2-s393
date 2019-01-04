@@ -11,7 +11,7 @@ const testList = (fileType) => {
   const expectedDiff = fs.readFileSync(`${__dirname}/__fixtures__/expected.txt`, 'utf8');
 
   return [fileType, configOne, configTwo, expectedDiff];
-}
+};
 
 test.each(fileTypes.map(type => testList(type)))(
   'test (%s)',
