@@ -21,3 +21,6 @@
 
 ### Пример использования (4 шаг (ini))
 [![asciicast](https://asciinema.org/a/713wZkrWsVlJ6yq3LhpkBQgKw.png)](https://asciinema.org/a/713wZkrWsVlJ6yq3LhpkBQgKw)
+
+### Пример использования (5 шаг (recursive))
+[![asciicast](https://asciinema.org/a/eLRwMvkhcjqes0v2ETm4AlgPK.png)](https://asciinema.org/a/eLRwMvkhcjqes0v2ETm4AlgPK)
