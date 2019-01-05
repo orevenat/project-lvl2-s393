@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import _ from 'lodash';
 import parsers from './parsers';
+import build from './buildAst';
+import render from './renderDiff';
 
 const readFile = (filepath) => {
   const content = fs.readFileSync(filepath, 'utf-8');
@@ -12,28 +13,8 @@ const readFile = (filepath) => {
 export default (filepathBefore, filepathAfter) => {
   const configBefore = parsers(...readFile(filepathBefore));
   const configAfter = parsers(...readFile(filepathAfter));
-  const configKeysMerged = _.union(_.keys(configBefore), _.keys(configAfter));
-  const diffResult = configKeysMerged.map(key => ({
-    name: key,
-    oldValue: _.has(configBefore, key) ? configBefore[key] : null,
-    newValue: _.has(configAfter, key) ? configAfter[key] : null,
-  }));
 
-  const renderResult = diffResult.map((item) => {
-    if (item.oldValue === item.newValue) {
-      return `    ${item.name}: ${item.newValue}`;
-    }
+  const ast = build(configBefore, configAfter);
 
-    if (item.oldValue === null) {
-      return `  + ${item.name}: ${item.newValue}`;
-    }
-
-    if (item.newValue === null) {
-      return `  - ${item.name}: ${item.oldValue}`;
-    }
-
-    return `  + ${item.name}: ${item.newValue}\n  - ${item.name}: ${item.oldValue}`;
-  });
-
-  return `{\n${renderResult.join('\n')}\n}`;
+  return render(ast);
 };
