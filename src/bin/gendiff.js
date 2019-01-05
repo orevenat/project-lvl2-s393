@@ -9,8 +9,8 @@ program
   .description('Compares two configuration files and shows a difference.')
   .arguments('<firstConfig> <secondConfig>')
   .action((configBefore, configAfter) => {
-    const diff = genDiff(configBefore, configAfter);
+    const diff = genDiff(configBefore, configAfter, program.format);
     console.log(diff);
   })
-  .option('-f, --format [type]', 'Output format')
+  .option('-f, --format [type]', 'Output format: recursive or plain', 'recursive')
   .parse(process.argv);

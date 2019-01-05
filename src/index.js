@@ -10,11 +10,11 @@ const readFile = (filepath) => {
   return [content, fileExtension];
 };
 
-export default (filepathBefore, filepathAfter) => {
+export default (filepathBefore, filepathAfter, format = 'recursive') => {
   const configBefore = parsers(...readFile(filepathBefore));
   const configAfter = parsers(...readFile(filepathAfter));
 
   const ast = build(configBefore, configAfter);
 
-  return render(ast);
+  return render(ast, format);
 };
