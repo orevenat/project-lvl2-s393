@@ -20,11 +20,18 @@ test.each(fileTypes.map(testList))(
   },
 );
 
-test('.json recursive', () => {
+const testRecursiveList = (fileType) => {
   const fixturePath = path.resolve('__tests__/__fixtures__/');
-  const configOne = `${fixturePath}/config_before_recursive.json`;
-  const configTwo = `${fixturePath}/config_after_recursive.json`;
+  const configOne = `${fixturePath}/config_before_recursive${fileType}`;
+  const configTwo = `${fixturePath}/config_after_recursive${fileType}`;
   const expectedDiff = fs.readFileSync(`${__dirname}/__fixtures__/expected_recursive.txt`, 'utf8');
 
-  expect(genDiff(configOne, configTwo)).toBe(expectedDiff);
-});
+  return [fileType, configOne, configTwo, expectedDiff];
+};
+
+test.each(fileTypes.map(testRecursiveList))(
+  'test (%s)',
+  (fileType, configOne, configTwo, expectedDiff) => {
+    expect(genDiff(configOne, configTwo)).toBe(expectedDiff);
+  },
+);

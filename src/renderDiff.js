@@ -4,9 +4,7 @@ const renderValue = (value, depth) => {
   if (value instanceof Object) {
     const newDepth = depth + 1;
     const itemSpace = '    '.repeat(newDepth);
-    const values = _.keys(value).reduce((acc, key) => {
-      return `${acc}${itemSpace}    ${key}: ${value[key]}\n`;
-    }, '');
+    const values = _.keys(value).reduce((acc, key) => `${acc}${itemSpace}    ${key}: ${value[key]}\n`, '');
 
     return `{\n${values}${itemSpace}}`;
   }
@@ -18,15 +16,17 @@ const renderLine = (item, depth) => {
   const itemSpace = '    '.repeat(depth);
   if (item.state === 'unchanged') {
     return `${itemSpace}    ${item.name}: ${renderValue(item.newValue, depth)}`;
-  } else if (item.state === 'changed') {
+  } if (item.state === 'changed') {
     return [
       `${itemSpace}  + ${item.name}: ${renderValue(item.newValue, depth)}`,
       `${itemSpace}  - ${item.name}: ${renderValue(item.oldValue, depth)}`];
-  } else if (item.state === 'deleted') {
+  } if (item.state === 'deleted') {
     return `${itemSpace}  - ${item.name}: ${renderValue(item.oldValue, depth)}`;
-  } else if (item.state === 'added') {
+  } if (item.state === 'added') {
     return `${itemSpace}  + ${item.name}: ${renderValue(item.newValue, depth)}`;
   }
+
+  return '';
 };
 
 const renderDiff = (ast, depth) => (ast.reduce((acc, item) => {
