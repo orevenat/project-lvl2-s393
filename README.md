@@ -24,3 +24,6 @@
 
 ### Пример использования (5 шаг (recursive))
 [![asciicast](https://asciinema.org/a/eLRwMvkhcjqes0v2ETm4AlgPK.png)](https://asciinema.org/a/eLRwMvkhcjqes0v2ETm4AlgPK)
+
+### Пример использования (6 шаг (plain format))
+[![asciicast](https://asciinema.org/a/EkEDZfDfehjYR7jVfyrfbslpO.png)](https://asciinema.org/a/EkEDZfDfehjYR7jVfyrfbslpO)
