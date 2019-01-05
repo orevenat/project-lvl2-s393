@@ -1,15 +1,15 @@
 import _ from 'lodash';
 
 const renderValue = (value, depth) => {
-  if (value instanceof Object) {
-    const newDepth = depth + 1;
-    const itemSpace = '    '.repeat(newDepth);
-    const values = _.keys(value).reduce((acc, key) => `${acc}${itemSpace}    ${key}: ${value[key]}\n`, '');
-
-    return `{\n${values}${itemSpace}}`;
+  if (!_.isObject(value)) {
+    return value;
   }
 
-  return value;
+  const newDepth = depth + 1;
+  const itemSpace = '    '.repeat(newDepth);
+  const values = _.keys(value).reduce((acc, key) => `${acc}${itemSpace}    ${key}: ${value[key]}\n`, '');
+
+  return `{\n${values}${itemSpace}}`;
 };
 
 const renderLine = (item, depth) => {
