@@ -1,9 +1,9 @@
 import renderPlain from './renderPlain';
 import renderRecursive from './renderRecursive';
 
-const formatList = {
+const rendererList = {
   recursive: renderRecursive,
   plain: renderPlain,
 };
 
-export default (ast, format) => formatList[format](ast);
+export default (ast, format) => rendererList[format](ast);
