@@ -14,19 +14,20 @@ const renderValue = (value, depth) => {
 
 const renderLine = (item, depth) => {
   const itemSpace = '    '.repeat(depth);
-  if (item.state === 'unchanged') {
-    return `${itemSpace}    ${item.name}: ${renderValue(item.newValue, depth)}`;
-  } if (item.state === 'changed') {
-    return [
-      `${itemSpace}  + ${item.name}: ${renderValue(item.newValue, depth)}`,
-      `${itemSpace}  - ${item.name}: ${renderValue(item.oldValue, depth)}`];
-  } if (item.state === 'deleted') {
-    return `${itemSpace}  - ${item.name}: ${renderValue(item.oldValue, depth)}`;
-  } if (item.state === 'added') {
-    return `${itemSpace}  + ${item.name}: ${renderValue(item.newValue, depth)}`;
+  switch (item.state) {
+    case 'unchanged':
+      return `${itemSpace}    ${item.name}: ${renderValue(item.newValue, depth)}`;
+    case 'changed':
+      return [
+        `${itemSpace}  + ${item.name}: ${renderValue(item.newValue, depth)}`,
+        `${itemSpace}  - ${item.name}: ${renderValue(item.oldValue, depth)}`];
+    case 'deleted':
+      return `${itemSpace}  - ${item.name}: ${renderValue(item.oldValue, depth)}`;
+    case 'added':
+      return `${itemSpace}  + ${item.name}: ${renderValue(item.newValue, depth)}`;
+    default:
+      return '';
   }
-
-  return '';
 };
 
 const renderDiff = (ast, depth) => (ast.reduce((acc, item) => {
