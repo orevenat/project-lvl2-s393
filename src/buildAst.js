@@ -1,37 +1,40 @@
 import _ from 'lodash';
-import { isObject } from 'util';
+
+
+const stateList = [
+  {
+    check: (configBefore, configAfter, name) => !_.has(configBefore, name)
+      && _.has(configAfter, name),
+    make: (configBefore, configAfter, name) => ({ name, oldValue: null, newValue: configAfter[name], state: 'added' }),
+  },
+  {
+    check: (configBefore, configAfter, name) => _.has(configBefore, name) && !_.has(configAfter, name),
+    make: (configBefore, configAfter, name) => ({ name, oldValue: configBefore[name], newValue: null, state: 'deleted' }),
+  },
+  {
+    check: (configBefore, configAfter, name) => _.has(configBefore, name) && _.has(configAfter, name) && _.isObject(configBefore[name]) && _.isObject(configAfter[name]),
+    make: (configBefore, configAfter,name) => ({
+      name,
+      state: 'nested',
+      childrens: buildAst(configBefore[name], configAfter[name]),
+    }),
+  },
+  {
+    check: (configBefore, configAfter, name) => _.has(configBefore, name) && _.has(configAfter, name) && configBefore[name] === configAfter[name],
+    make: (configBefore, configAfter, name) => ({ name, oldValue: configBefore[name], newValue: configAfter[name], state: 'unchanged' }),
+  },
+  {
+    check: (configBefore, configAfter, name) => _.has(configBefore, name) && _.has(configAfter, name) && configBefore[name] !== configAfter[name],
+    make: (configBefore, configAfter, name) => ({ name, oldValue: configBefore[name], newValue: configAfter[name], state: 'changed' }),
+  },
+];
+
+const getState = (oldValue, newValue, name) => stateList.find(({ check }) => check(oldValue, newValue, name));
 
 const buildAst = (configBefore, configAfter) => {
   const configKeysMerged = _.union(_.keys(configBefore), _.keys(configAfter));
-
-  return configKeysMerged.map((name) => {
-    if (isObject(configBefore[name]) && isObject(configAfter[name])) {
-      return {
-        name,
-        childrens: buildAst(configBefore[name], configAfter[name]),
-      };
-    }
-
-    const res = {
-      name,
-      oldValue: _.has(configBefore, name) ? configBefore[name] : null,
-      newValue: _.has(configAfter, name) ? configAfter[name] : null,
-    };
-
-    if (res.oldValue === res.newValue) {
-      return { ...res, state: 'unchanged' };
-    }
-
-    if (res.oldValue === null) {
-      return { ...res, state: 'added' };
-    }
-
-    if (res.newValue === null) {
-      return { ...res, state: 'deleted' };
-    }
-
-    return { ...res, state: 'changed' };
-  });
+  
+  return configKeysMerged.map((name) => getState(configBefore, configAfter, name).make(configBefore, configAfter, name));
 };
 
 export default buildAst;

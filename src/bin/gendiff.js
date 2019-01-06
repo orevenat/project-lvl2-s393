@@ -12,5 +12,5 @@ program
     const diff = genDiff(configBefore, configAfter, program.format);
     console.log(diff);
   })
-  .option('-f, --format [type]', 'Output format: recursive or plain', 'recursive')
+  .option('-f, --format [type]', 'Output format: recursive, plain, json', 'recursive')
   .parse(process.argv);

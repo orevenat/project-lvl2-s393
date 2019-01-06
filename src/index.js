@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import parsers from './parsers';
-import build from './buildAst';
+import parse from './parsers';
+import buildAST from './buildAst';
 import render from './renderers';
 
 const readFile = (filepath) => {
@@ -11,10 +11,10 @@ const readFile = (filepath) => {
 };
 
 export default (filepathBefore, filepathAfter, format = 'recursive') => {
-  const configBefore = parsers(...readFile(filepathBefore));
-  const configAfter = parsers(...readFile(filepathAfter));
+  const configBefore = parse(...readFile(filepathBefore));
+  const configAfter = parse(...readFile(filepathAfter));
 
-  const ast = build(configBefore, configAfter);
+  const ast = buildAST(configBefore, configAfter);
 
   return render(ast, format);
 };

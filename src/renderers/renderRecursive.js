@@ -31,7 +31,7 @@ const renderLine = (item, depth) => {
 };
 
 const renderDiff = (ast, depth) => (ast.reduce((acc, item) => {
-  if (item.childrens instanceof Array) {
+  if (item.state === 'nested') {
     const newDepth = depth + 1;
     const objectSpace = '    '.repeat(newDepth);
     return [...acc, `${objectSpace}${item.name}: {`, renderDiff(item.childrens, newDepth), `${objectSpace}}`];
@@ -40,4 +40,4 @@ const renderDiff = (ast, depth) => (ast.reduce((acc, item) => {
   return [...acc, renderLine(item, depth)];
 }, []));
 
-export default ast => `{\n${_.flattenDeep(renderDiff(ast, 0)).join('\n')}\n}`;
+export default ast => ['{', ..._.flattenDeep(renderDiff(ast, 0)), '}'].join('\n');

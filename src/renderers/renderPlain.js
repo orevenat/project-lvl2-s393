@@ -26,7 +26,7 @@ const renderItem = (item, parents) => {
 
 const render = (nodeList, parents) => {
   const result = nodeList.filter(item => item.state !== 'unchanged').map((item) => {
-    if (item.childrens instanceof Array) {
+    if (item.state === 'nested') {
       return render(item.childrens, [...parents, item.name]);
     }
 
