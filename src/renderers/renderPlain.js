@@ -14,26 +14,19 @@ const stringify = (str) => {
 };
 
 const actionList = {
-  changed: item => `updated. From ${stringify(item.oldValue)} to ${stringify(item.newValue)}`,
-  added: item => `added with value: ${stringify(item.newValue)}`,
-  deleted: () => 'removed',
+  nested: (item, name, f) => f(item.childrens, name),
+  changed: (item, name) => `Property '${name.join('.')}' was updated. From ${stringify(item.oldValue)} to ${stringify(item.newValue)}`,
+  added: (item, name) => `Property '${name.join('.')}' was added with value: ${stringify(item.newValue)}`,
+  deleted: (item, name) => `Property '${name.join('.')}' was removed`,
 };
 
-const renderItem = (item, parents) => {
-  const name = [...parents, item.name].join('.');
-  return `Property '${name}' was ${actionList[item.type](item)}`;
+const renderItem = (item, parents, f) => {
+  const name = [...parents, item.name];
+  return actionList[item.type](item, name, f);
 };
 
-const render = (nodeList, parents) => {
-  const result = nodeList.filter(item => item.type !== 'unchanged').map((item) => {
-    if (item.type === 'nested') {
-      return render(item.childrens, [...parents, item.name]);
-    }
-
-    return renderItem(item, parents);
-  });
-
-  return _.flatten(result);
-};
+const render = (nodeList, parents) => (
+  _.flatten(nodeList.filter(item => item.type !== 'unchanged').map(item => renderItem(item, parents, render)))
+);
 
 export default ast => render(ast, []).join('\n');
