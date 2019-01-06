@@ -27,3 +27,6 @@
 
 ### Пример использования (6 шаг (plain format))
 [![asciicast](https://asciinema.org/a/EkEDZfDfehjYR7jVfyrfbslpO.png)](https://asciinema.org/a/EkEDZfDfehjYR7jVfyrfbslpO)
+
+### Пример использования (7 шаг (json format))
+[![asciicast](https://asciinema.org/a/Rv8wEs1tNb1H2ISuqLd1x691b.png)](https://asciinema.org/a/Rv8wEs1tNb1H2ISuqLd1x691b)
