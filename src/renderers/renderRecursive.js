@@ -12,9 +12,13 @@ const renderValue = (value, depth) => {
   return `{\n${values}${itemSpace}}`;
 };
 
-const renderLine = (item, depth) => {
+const renderLine = (item, depth, f) => {
   const itemSpace = '    '.repeat(depth);
+  const newDepth = depth + 1;
+  const objectSpace = '    '.repeat(newDepth);
   switch (item.type) {
+    case 'nested':
+      return [`${objectSpace}${item.name}: {`, f(item.childrens, newDepth), `${objectSpace}}`];
     case 'unchanged':
       return `${itemSpace}    ${item.name}: ${renderValue(item.newValue, depth)}`;
     case 'changed':
@@ -26,18 +30,12 @@ const renderLine = (item, depth) => {
     case 'added':
       return `${itemSpace}  + ${item.name}: ${renderValue(item.newValue, depth)}`;
     default:
-      return '';
+      throw new TypeError(`${item.type} not exist`);
   }
 };
 
-const renderDiff = (ast, depth) => (ast.reduce((acc, item) => {
-  if (item.type === 'nested') {
-    const newDepth = depth + 1;
-    const objectSpace = '    '.repeat(newDepth);
-    return [...acc, `${objectSpace}${item.name}: {`, renderDiff(item.childrens, newDepth), `${objectSpace}}`];
-  }
-
-  return [...acc, renderLine(item, depth)];
-}, []));
+const renderDiff = (ast, depth) => (
+  (ast.reduce((acc, item) => [...acc, renderLine(item, depth, renderDiff)], []))
+);
 
 export default ast => ['{', ..._.flattenDeep(renderDiff(ast, 0)), '}'].join('\n');
