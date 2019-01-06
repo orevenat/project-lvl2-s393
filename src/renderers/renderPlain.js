@@ -20,10 +20,7 @@ const actionList = {
   deleted: (item, name) => `Property '${name.join('.')}' was removed`,
 };
 
-const renderItem = (item, parents, f) => {
-  const name = [...parents, item.name];
-  return actionList[item.type](item, name, f);
-};
+const renderItem = (item, parents, f) => actionList[item.type](item, [...parents, item.name], f);
 
 const render = (nodeList, parents) => (
   _.flatten(nodeList.filter(item => item.type !== 'unchanged').map(item => renderItem(item, parents, render)))
