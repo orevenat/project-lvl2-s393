@@ -6,14 +6,14 @@ const stateList = [
     check: (configBefore, configAfter, name) => !_.has(configBefore, name)
       && _.has(configAfter, name),
     make: (configBefore, configAfter, name) => ({
-      name, oldValue: null, newValue: configAfter[name], state: 'added',
+      name, newValue: configAfter[name], state: 'added',
     }),
   },
   {
     check: (configBefore, configAfter, name) => _.has(configBefore, name)
       && !_.has(configAfter, name),
     make: (configBefore, configAfter, name) => ({
-      name, oldValue: configBefore[name], newValue: null, state: 'deleted',
+      name, oldValue: configBefore[name], state: 'deleted',
     }),
   },
   {
