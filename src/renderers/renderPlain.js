@@ -21,12 +21,12 @@ const actionList = {
 
 const renderItem = (item, parents) => {
   const name = [...parents, item.name].join('.');
-  return `Property '${name}' was ${actionList[item.state](item)}`;
+  return `Property '${name}' was ${actionList[item.type](item)}`;
 };
 
 const render = (nodeList, parents) => {
-  const result = nodeList.filter(item => item.state !== 'unchanged').map((item) => {
-    if (item.state === 'nested') {
+  const result = nodeList.filter(item => item.type !== 'unchanged').map((item) => {
+    if (item.type === 'nested') {
       return render(item.childrens, [...parents, item.name]);
     }
 

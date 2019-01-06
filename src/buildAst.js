@@ -1,19 +1,19 @@
 import _ from 'lodash';
 
 
-const stateList = [
+const typeList = [
   {
     check: (configBefore, configAfter, name) => !_.has(configBefore, name)
       && _.has(configAfter, name),
     make: (configBefore, configAfter, name) => ({
-      name, newValue: configAfter[name], state: 'added',
+      name, newValue: configAfter[name], type: 'added',
     }),
   },
   {
     check: (configBefore, configAfter, name) => _.has(configBefore, name)
       && !_.has(configAfter, name),
     make: (configBefore, configAfter, name) => ({
-      name, oldValue: configBefore[name], state: 'deleted',
+      name, oldValue: configBefore[name], type: 'deleted',
     }),
   },
   {
@@ -22,7 +22,7 @@ const stateList = [
       && _.isObject(configAfter[name]),
     make: (configBefore, configAfter, name, f) => ({
       name,
-      state: 'nested',
+      type: 'nested',
       childrens: f(configBefore[name], configAfter[name]),
     }),
   },
@@ -30,25 +30,25 @@ const stateList = [
     check: (configBefore, configAfter, name) => _.has(configBefore, name)
       && _.has(configAfter, name) && configBefore[name] === configAfter[name],
     make: (configBefore, configAfter, name) => ({
-      name, oldValue: configBefore[name], newValue: configAfter[name], state: 'unchanged',
+      name, oldValue: configBefore[name], newValue: configAfter[name], type: 'unchanged',
     }),
   },
   {
     check: (configBefore, configAfter, name) => _.has(configBefore, name)
       && _.has(configAfter, name) && configBefore[name] !== configAfter[name],
     make: (configBefore, configAfter, name) => ({
-      name, oldValue: configBefore[name], newValue: configAfter[name], state: 'changed',
+      name, oldValue: configBefore[name], newValue: configAfter[name], type: 'changed',
     }),
   },
 ];
 
-const getState = (oldValue, newValue, name) => stateList
+const getType = (oldValue, newValue, name) => typeList
   .find(({ check }) => check(oldValue, newValue, name));
 
 const buildAst = (configBefore, configAfter) => {
   const configKeysMerged = _.union(_.keys(configBefore), _.keys(configAfter));
 
-  return configKeysMerged.map(name => getState(configBefore, configAfter, name)
+  return configKeysMerged.map(name => getType(configBefore, configAfter, name)
     .make(configBefore, configAfter, name, buildAst));
 };
 

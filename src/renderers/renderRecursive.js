@@ -14,7 +14,7 @@ const renderValue = (value, depth) => {
 
 const renderLine = (item, depth) => {
   const itemSpace = '    '.repeat(depth);
-  switch (item.state) {
+  switch (item.type) {
     case 'unchanged':
       return `${itemSpace}    ${item.name}: ${renderValue(item.newValue, depth)}`;
     case 'changed':
@@ -31,7 +31,7 @@ const renderLine = (item, depth) => {
 };
 
 const renderDiff = (ast, depth) => (ast.reduce((acc, item) => {
-  if (item.state === 'nested') {
+  if (item.type === 'nested') {
     const newDepth = depth + 1;
     const objectSpace = '    '.repeat(newDepth);
     return [...acc, `${objectSpace}${item.name}: {`, renderDiff(item.childrens, newDepth), `${objectSpace}}`];
