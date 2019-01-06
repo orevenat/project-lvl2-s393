@@ -34,8 +34,6 @@ const renderLine = (item, depth, f) => {
   }
 };
 
-const renderDiff = (ast, depth) => (
-  (ast.reduce((acc, item) => [...acc, renderLine(item, depth, renderDiff)], []))
-);
+const renderDiff = (ast, depth) => ast.map(item => renderLine(item, depth, renderDiff));
 
 export default ast => ['{', ..._.flattenDeep(renderDiff(ast, 0)), '}'].join('\n');
