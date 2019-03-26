@@ -9,10 +9,10 @@ build:
 	npm run build
 
 test:
-	npm test
+	npx jest
 
 test-watch:
-	npm test -- --watch
+	npx jest --watch
 
 lint:
 	npx eslint .
