@@ -37,7 +37,7 @@
     "@babel/preset-env": "^7.1.0",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^25.0.0",
     "debug": "^4.0.1",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -45,8 +45,8 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jest": "^21.26.2",
     "eslint-plugin-lodash-fp": "^2.2.0-a1",
-    "jest": "^23.6.0",
-    "jest-cli": "^23.6.0"
+    "jest": "^25.0.0",
+    "jest-cli": "^25.0.0"
   },
   "dependencies": {
     "commander": "^2.19.0",
